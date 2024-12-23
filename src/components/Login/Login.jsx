@@ -3,7 +3,7 @@ import {useFormik }from 'formik'
 import React, { useContext, useEffect, useState } from 'react'
 import * as yup from 'yup'
 import { Link, Navigate, useNavigate } from 'react-router-dom'
-import style from "./login.module.css"
+// import style from "./login.module.css"
 import { userContext } from '../../../Context/UserContext'
 export default function Login() {
 let navigate=useNavigate()
@@ -93,9 +93,9 @@ async function handleSubmitApi(values){
 
   <button type="submit" className="text-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5  dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
  
- {getApi?<span className={style.loader}></span>:"Submit"}
+ {"Submit"}
 
-  
+ {/* getApi?<span className={style.loader}></span>: */}
 
   
     </button>

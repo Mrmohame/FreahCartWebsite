@@ -1,0 +1,103 @@
+
+
+@import url("https://fonts.googleapis.com/css2?family=Nabla:EDPT,EHLT@30..200,24&display=swap");
+
+ h2.products {
+	 font-size: 6vw;
+     position: relative;
+     margin-block: 3rem;
+	 /* font-family: Nabla; */
+     /* color: aliceblue !important; */
+}
+h2.products::after{
+content: "";
+position: absolute;
+width: 40%;
+left: 50%;
+transform: translateX(-50%) ;
+bottom: 0;
+height: 5px;
+background-color: gray;
+
+}
+ @font-palette-values --Nabla {
+	 font-family: Nabla;
+	 base-palette: 2;
+}
+ span.design {
+	 animation: depth 1s ease-in-out alternate infinite;
+	 position: relative;
+	 display: inline-block;
+	 font-variation-settings: "EDPT" 30;
+	 font-palette: --Nabla;
+}
+ 
+ @keyframes depth {
+	 0% {
+		 transform: translatex(0) translatey(0);
+	}
+	 100% {
+		 font-variation-settings: "EDPT" 200;
+		 transform: translatex(0.15em) translatey(0.1em);
+	}
+}
+ 
+
+.CartDiv{
+	overflow: hidden;
+}
+.addCart{
+	position: relative;
+	transform: translateY(250%);
+	transition: all 1s;
+	z-index: 9599;
+}
+.CartDiv:hover .addCart{
+
+	transform: translateY(0%);
+}
+.CartDiv:hover{
+	overflow: visible;
+}
+
+.categoryHover:hover .layer{
+	top: 0% !important;
+}
+
+
+
+
+
+.loader {
+    position: relative;
+    width: 100px;
+    height: 16px;
+  }
+  .loader:before , .loader:after{
+    content: "";
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 32px 0 #fff;
+    left: 0;
+    top: 0;
+    animation: ballMoveX 1s linear infinite;
+  }
+  .loader:after {
+    box-shadow: none;
+    transform-origin: 40px 0;
+    transform: rotate(-153deg);
+    animation: rotateLoader 1s linear infinite;
+  }
+
+  @keyframes rotateLoader {
+    0% , 10%{ transform: rotate(-153deg); }
+    90%, 100% { transform: rotate(0deg); }
+  }
+  @keyframes ballMoveX {
+    0% , 10%{  transform: translateX(0) }
+    90%, 100% { transform: translateX(32px) }
+  }
+      

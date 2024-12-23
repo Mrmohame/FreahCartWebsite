@@ -1,0 +1,6 @@
+.products:hover ~ .allProducts{
+/* display: block; */
+}
+.allProducts:hover{
+    /* display: block; */
+}

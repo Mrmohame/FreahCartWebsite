@@ -10,7 +10,7 @@ let navigate=useNavigate()
   let [getApi,setGetApi]=useState(false)
   let [globalError,setGlobalError]=useState("")
 
-  let {setCheckLogin,setUserName} = useContext(userContext)
+  let {setCheckLogin,setUserName,setUserEmail} = useContext(userContext)
 
 let validationSchema=yup.object().shape({
 
@@ -28,9 +28,10 @@ async function handleSubmitApi(values){
   function(data){
     localStorage.setItem("token", data.data.token)
     localStorage.setItem("userName", data.data.user.name)
+    localStorage.setItem("userEmail", data.data.user.email)
+    setUserEmail(data.data.user.email)
     setCheckLogin(data.data.token)
     setUserName(data.data.user.name)
-
     setGetApi(false)
     console.log(data);
     navigate('/')
@@ -101,7 +102,9 @@ async function handleSubmitApi(values){
     </button>
 
     <p className='text-center'>Don't have account ? <Link to="/register" className='text-blue-600'>Register</Link> </p>
-
+    <Link to="/forgetPassword" className='text-blue-600'>
+     <p className='text-center'>Forget Password ?</p>
+    </Link> 
 </form>
 
 

@@ -25,6 +25,9 @@ import AnotherCategories from './components/AnotherCategories/AnotherCategories'
 import Categories from './components/Categories/Categories'
 import Brands from './components/Brands/Brands'
 import WishList from './components/WishList/WishList'
+import ForgetPassword from './components/ForgetPassword/ForgetPassword'
+import VerfiyCode from './components/VerfiyCode/VerfiyCode'
+import ResetPassword from './components/ResetPassword/ResetPassword'
 
 
 
@@ -46,6 +49,9 @@ let provide = createBrowserRouter([
     {path:"Anlo",element:<ProtectedRouting><AnotherCategories/></ProtectedRouting>},
     {path:"categorydetails/:category",element:<ProtectedRouting><CategoryDetails/></ProtectedRouting>},
     {path:"specificcategorydetails/:id/:category",element:<ProtectedRouting><SpecificCategoryDetails/></ProtectedRouting>},
+    {path:"forgetPassword",element:<ForgetPassword/>},
+    {path:"verifyCode",element:<VerfiyCode/>},
+    {path:"resetPassword",element:<ResetPassword/>},
    {path:"login",element:<Login/>},
     {path:"logout",element:<Logout/>},
     {path:"register",element:<Register/>},

@@ -20,26 +20,21 @@ function addToCart(id){
   .then((response)=>response)
   .catch((error)=>error)
 }
-
 function CartData(){
   return axios.get("https://ecommerce.routemisr.com/api/v1/cart", {headers:headers})
   .then((response)=>response)
   .catch((error)=>error)
 }
-
 function deleteCart(id){
   return axios.delete(`https://ecommerce.routemisr.com/api/v1/cart/${id}`, {headers:headers})
   .then((response)=>response)
   .catch((error)=>error)
 }
-
 function updateCart(id,count){
   return axios.put(`https://ecommerce.routemisr.com/api/v1/cart/${id}`,{count} ,{headers:headers})
   .then((response)=>response)
   .catch((error)=>error)
 }
-
-
 function CheckOut(id,url,values){
   return axios.post(`https://ecommerce.routemisr.com/api/v1/orders/checkout-session/${id}?url=${url}`,
     {
@@ -52,14 +47,6 @@ function CheckOut(id,url,values){
   .then((response)=>response)
   .catch((error)=>error)
 }
-
-
-
-async function getNumberOfItems(){
-let {data}= await CartData()
-setNumOfItems(data)
-}
-
 function AddWishList(id){
   return axios.post(`https://ecommerce.routemisr.com/api/v1/wishlist`,
     {
@@ -72,7 +59,6 @@ function AddWishList(id){
   .then((response)=>response)
   .catch((error)=>error)
 }
-
 function RemoveWishList(id){
   return axios.delete(`https://ecommerce.routemisr.com/api/v1/wishlist/${id}`,
 {
@@ -82,7 +68,6 @@ function RemoveWishList(id){
   .then((response)=>response)
   .catch((error)=>error)
 }
-
 function GetUserWishList() {
   return axios.get(`https://ecommerce.routemisr.com/api/v1/wishlist`,
     {
@@ -98,9 +83,17 @@ function GetUserWishList() {
       .catch((error)=>error)
 }
 
+
+async function getNumberOfItems(){
+  let {data}= await CartData()
+  setNumOfItems(data)
+  }
+
 useEffect(()=>{
+ if(headers == true){
   getNumberOfItems()
   GetUserWishList()
+ }
 },[])
 
   return <CartContext.Provider value={{numOfWishList,setnumOfWishList,numOfItems,setNumOfItems,addToCart,CartData,deleteCart,updateCart,CheckOut,AddWishList,RemoveWishList}}>

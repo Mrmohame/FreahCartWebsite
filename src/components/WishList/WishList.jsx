@@ -4,21 +4,25 @@ import UseLoading from '../Hook/UseLoading'
 import { Link } from 'react-router-dom'
 import style from "../Products/Products.module.css"
 import toast, { Toaster } from 'react-hot-toast';
+import UseProducts from '../Hook/UseProducts'
 
 export default function WishList() {
 
  let {addToCart,setNumOfItems,AddWishList,RemoveWishList,setnumOfWishList,numOfWishList}=useContext(CartContext)
 
+ console.log(numOfWishList);
+ 
  function JustOpen() {
   numOfWishList ?  numOfWishList?.map((id) => {
     document?.getElementById(id.id)?.classList?.replace("text-black","text-red-700")
   }):null
 }
-JustOpen()
+
+
+
 async function makeWishList(id,theClickedProduct) {
   let res= await AddWishList(id)
   setnumOfWishList(res?.data?.data)
-  
   theClickedProduct.classList.replace("text-black","text-red-700")
   if(res.data.status == "success"){
     toast.success('Successfully, you add Product to wishList!');
@@ -46,6 +50,8 @@ async function removeAddedWishList(id,theClickedProduct) {
   
 if(numOfWishList?.filter((Product) => Product.id == id || Product == id) == false){
   makeWishList(id,theClickedProduct)
+  console.log();
+  
   console.log("notFound");
   
 }else{
@@ -76,14 +82,27 @@ async  function callAdd(id){
    }
     
   }
-if(numOfWishList == null || numOfWishList == "") {
+  
+
+
+if(numOfWishList == null) {
   return <UseLoading/>
 }
+
+useEffect(()=>{
+  JustOpen()
+},[])
+
 
   return (
     <>
     
-<div className='lg:mt-32'>
+<div className='mt-36 md:mt-24'>
+<div className="text-center pb-10">
+<h2 className={`text-center text-[2rem] md:text-[3.5rem] font-bold  `}>My Wish List</h2>
+<div className='w-[18%] mx-auto bg-gray-600  h-1'></div>
+
+</div>
 <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 w-[90%] gap-5 mx-auto">
 {numOfWishList? numOfWishList?.map((products) =>            <div key={products.id}  className={`py-8 px-4 m-1 ${style.CartDiv}  rounded-[15px]  hover:shadow-lg hover:shadow-green-500 duration-[500ms]`}>
            
@@ -112,7 +131,7 @@ if(numOfWishList == null || numOfWishList == "") {
 <button 
 onClick={()=>callAdd(products.id)}
 
-className={`${style.addCart} w-[80%] bg-green-600 text-white rounded-lg my-3 p-3`}><i class="fa-solid fa-plus"></i> Add to cart
+className={`${style.addCart} w-[80%] bg-green-600 text-white rounded-lg my-3 p-3`}><i className="fa-solid fa-plus"></i> Add to cart
 </button>
 
 <button

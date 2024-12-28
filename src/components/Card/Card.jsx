@@ -15,7 +15,6 @@ let [allData,setAllData] = useState()
 async function dataItems(){
 let {data} = await CartData()
 console.log(data);
-// console.log();
 setAllData(data)
 
 
@@ -62,18 +61,27 @@ async function deleteItems(id){
     }
 
 useEffect(() => {
-
 dataItems()
 },[])
 if(allData== null){
   return <UseLoading/>
   }
+
+
+
+
+
   return (
     <>
     
   
 
-<div className="w-[80%] mx-auto overflow-x-auto shadow-md sm:rounded-lg mt-36">
+<div className="w-[80%] mx-auto overflow-x-auto shadow-md sm:rounded-lg mt-36 md:mt-24 my-3">
+<div className="text-center pb-10">
+<h2 className={`text-center text-[2rem] md:text-[3.5rem] font-bold  `}>My Cart</h2>
+<div className='w-[16%] mx-auto bg-gray-600  h-1'></div>
+
+</div>
   <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
     <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
       <tr>
@@ -132,8 +140,8 @@ if(allData== null){
 
     </tbody>
   </table>
+{allData  && <Link to="/checkOut"><button className='w-full my-3 text-white py-2 rounded-lg bg-green-700'>Check Out</button></Link>}
 
-<Link to="/checkOut"><button className='w-full bg-green-700'>Check Out</button></Link>
 
 </div>
 

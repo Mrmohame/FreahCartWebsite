@@ -15,7 +15,7 @@ export default function Navbar1() {
 let navigate=useNavigate()
 let {counter}=useContext(counterContext)
 let [hover,setHover]=useState(false)
-let {checkLogin,setCheckLogin,userName,setUserName}=useContext(userContext)
+let {checkLogin,setCheckLogin,userEmail,userName,setUserName}=useContext(userContext)
 let {numOfItems,CartData} =useContext(CartContext)
 let [allData,setAllData] = useState()
 let [allCategories,setAllCategories] = useState([])
@@ -25,7 +25,8 @@ let [SearchElement,setSearchElement] = useState("")
 let [mk,setmk] = useState("")
 
 
-
+if(localStorage.getItem("token") == true){
+  
 function getAllCategories(){
   axios.get(`https://ecommerce.routemisr.com/api/v1/categories`)
   .then(function({data}){
@@ -123,9 +124,9 @@ useEffect(()=>{
   getAllCategories()
 
 
-document.addEventListener('DOMContentLoaded', function () {
-  document.getElementById('myCartDropdownButton1').click();
-});
+// document.addEventListener('DOMContentLoaded', function () {
+//   document.getElementById('myCartDropdownButton1').click();
+// });
 
 }
 
@@ -135,37 +136,35 @@ useEffect(()=>{
   document.body.addEventListener("mouseover",()=> {
   setHover(false)
   },true)
-//   document.querySelector(".allCategoryies")? document.querySelector(".allCategoryies").addEventListener("mouseover",(e)=>{
-//     // e.stopPropagation()
-   
-// },true)
-// :null
   }
   
   ,[])
+}
 
   return (
     <>
     
 
 
-<div className="w-[100%]  left-0 right-0  fixed top-0 z-50 ">
+<div className="w-[100%] left-0 right-0  fixed top-0 z-50 ">
 
-<Navbar className=' shadow-md bg-yellow-200' >
+<Navbar className='py-4 shadow-md bg-yellow-200' >
   
-      <Navbar.Brand className=' lg:ps-12' >
+  
      
-        <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
-        <Link to={"/"} title className="text-green-600 text-[1.5rem] font-bold">
-          <i class="fa-solid fa-store me-3 text-green-800"></i>
+        <span className=" self-center whitespace-nowrap text-xl font-semibold dark:text-white">
+        <Link to={"/"}  className="lg:ps-12 text-green-600 text-[1.5rem] font-bold">
+          <i className="fa-solid fa-store me-3 text-green-800"></i>
 E-commerce
    </Link>
         </span>
-      </Navbar.Brand>
+
+
 
       <div className="flex md:order-2 pe-10">
  
  {checkLogin !== false ? 
+ <>
        <Dropdown
        arrowIcon={false}
        inline
@@ -175,8 +174,15 @@ E-commerce
        className=''
      >
        <Dropdown.Header>
-         <span className="block text-sm">{userName}</span>
-         <span className="block truncate text-sm font-medium">name@flowbite.com</span>
+         <span className="block text-sm">
+         <span className='text-[1.2rem] me-2 text-green-700'>&#8594;</span>
+          <span className='font-bold me-2'>Name <span className='mx-1'>:</span></span>{userName}
+          </span>
+
+         <span className="block truncate my-2 text-sm font-medium">
+          <span className='text-[1.2rem] me-2 text-green-700'>&#8594;</span>
+          <span className='font-bold me-2'>Email <span className='ms-2'>:</span>
+          </span><br/><span className='me-2 text-green-700'>&spades;</span>{userEmail}</span>
        </Dropdown.Header>
        <Dropdown.Item>
        <button id="myCartDropdownButton1" data-dropdown-toggle="myCartDropdown1" type="button" className="inline-flex items-center rounded-lg justify-center p-2 hover:bg-gray-100 dark:hover:bg-gray-700 text-sm font-medium leading-none text-gray-900 dark:text-white">
@@ -192,71 +198,75 @@ E-commerce
         
       </button>
        </Dropdown.Item>
-       <Dropdown.Item>Settings</Dropdown.Item>
-       <Dropdown.Item>Earnings</Dropdown.Item>
+       <Dropdown.Item>
+        Settings
+        </Dropdown.Item>
+       <Dropdown.Item>
+        Earnings
+        </Dropdown.Item>
        <Dropdown.Divider />
        <Dropdown.Item onClick={logOut}>
 <NavLink  to="logout" className="text-red-700">Logout</NavLink>
 </Dropdown.Item>
      </Dropdown>
-     
+     <Navbar.Toggle />
+ </>    
      :
      <>
-     <li className="px-3">
+     
+<ul className='md:flex'>
+<li className="px-3 list-unstyled">
      <NavLink className="text-black" to="login">Login</NavLink>
      </li>
-     <li className="px-3">
+     <li className="px-3 list-unstyled">
      <NavLink className="text-black" to="register">Register</NavLink>
      </li>
+</ul>
    </>
 
 }
 
 
-        <Navbar.Toggle />
+      
 
       </div>
 
       {checkLogin !== false ? 
  <>
- <Navbar.Collapse className='ms-8'>
-        <Navbar.Link>
-     <NavLink to={"/"}> Home</NavLink>
-        </Navbar.Link>
-        <Navbar.Link >
-          <NavLink to="/Categories">Categories</NavLink>
-        </Navbar.Link>
-        <Navbar.Link >
-          <NavLink to={"/Brands"}>Brands</NavLink>
-        </Navbar.Link>
-        <Navbar.Link >
-        <NavLink to={"/Card"}>Cart</NavLink>
-        </Navbar.Link>
-        <Navbar.Link >
-        <NavLink to={"/WishList"}>WishList</NavLink>
-        </Navbar.Link>
+ <Navbar.Collapse className='md:ms-10 py-2'>
+       
+     <NavLink className="p-[5px] text-[1.1rem]" to={"/"}> Home</NavLink>
+     
+          <NavLink className="p-[5px] text-[1.1rem]" to="/Categories">Categories</NavLink>
+
+          <NavLink className="p-[5px] text-[1.1rem]" to={"/Brands"}>Brands</NavLink>
+   
+        <NavLink className="p-[5px] text-[1.1rem]" to={"/Card"}>Cart</NavLink>
+
+        <NavLink className="p-[5px] text-[1.1rem]" to={"/WishList"}>WishList</NavLink>
+   
       </Navbar.Collapse>
 
 
-<div class="flex items-center max-w-sm lg:w-[100%] mx-auto">   
-    <label for="simple-search" class="sr-only">Search</label>
-    <div class="relative w-full">
-        <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 20">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5v10M3 5a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm0 10a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm12 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm0 0V6a3 3 0 0 0-3-3H9m1.5-2-2 2 2 2"/>
+<div className="flex items-center max-w-sm lg:w-[100%] mx-auto">   
+    <label htmlFor="simple-search" className="sr-only">Search</label>
+    <div className="relative w-full">
+        <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+            <svg className="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 20">
+                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5v10M3 5a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm0 10a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm12 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm0 0V6a3 3 0 0 0-3-3H9m1.5-2-2 2 2 2"/>
             </svg>
         </div>
-        <input type="text"  id="simple-search" class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search branch name..."  onInput={(e)=>searchProduct(e.target)} />
+        <input type="text"  id="simple-search" className=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search branch name..."  onInput={(e)=>searchProduct(e.target)} />
     </div>
   <button
   onClick={(e)=> getSearchEle()}
-  type="submit" class="p-2.5 ms-2 text-sm font-medium text-white bg-green-800 rounded-lg  focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+  type="submit" className="p-2.5 ms-2 text-sm font-medium text-white bg-green-800 rounded-lg  focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
   <svg className="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
     <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
   </svg>
   <span className="sr-only">Search</span>
 </button>
-{/* <button >hello</button> */}
+
 </div>
 
 </>
@@ -266,12 +276,29 @@ E-commerce
 
     </Navbar>
 
-<div className='w-[100%] bg-white   shadow-xl'>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{/* <div className='w-[100%] bg-white  shadow-xl'>
 
 <ul className=' flex  justify-evenly'>
 {allCategories?.map((category) =>   <li className=' my-2 bg-white cursor-pointer hover:border-b-2 hover:border-black duration-500'
 onMouseOver={(e)=>{
-
   setHover(true)
   openTheCategory(category?.name)
 }}
@@ -311,7 +338,7 @@ onMouseOver={(e)=>{
 :null
 }
 
-</div>
+</div> */}
 
 
 </div>

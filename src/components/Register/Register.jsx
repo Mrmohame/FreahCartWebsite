@@ -9,7 +9,7 @@ import { userContext } from '../../../Context/UserContext'
 export default function Register1() {
 let navigate=useNavigate()
 
-let {setCheckLogin,setUserName} = useContext(userContext)
+let {setCheckLogin,setUserName,setUserEmail} = useContext(userContext)
 
   let [getApi,setGetApi]=useState(false)
   let [globalError,setGlobalError]=useState("")
@@ -27,29 +27,31 @@ let validationSchema=yup.object().shape({
 
 async function handleSubmitApi(values){
   setGetApi(true)
-     axios.post("https://ecommerce.routemisr.com/api/v1/auth/signup", values)
- .then(
-  function(data){
-    localStorage.setItem("token", data.data.token)
-    localStorage.setItem("userName", data.data.user.name)
-    setCheckLogin(data.data.token)
-    setUserName(data.data.user.name)
-  
-    setGetApi(false)
-    navigate('/')
-    // console.log(data.data.user.name);
-  }
- ).catch(
-  function(error){
-    setGlobalError(error.response.data.message)
-    setGetApi(false)
-    console.log(error);
-    // console.log(error.message);
-    
-  }
- )
+  axios.post("https://ecommerce.routemisr.com/api/v1/auth/signup", values)
+  .then(
+   function(data){
+     localStorage.setItem("token", data.data.token)
+     localStorage.setItem("userName", data.data.user.name)
+     localStorage.setItem("userEmail", data.data.user.email)
+     setUserEmail(data.data.user.email)
+     setCheckLogin(data.data.token)
+     setUserName(data.data.user.name)
+     setGetApi(false)
+     navigate('/')
+   }
+  ).catch(
+   function(error){
+     setGlobalError(error.response.data.message)
+     setGetApi(false)
+     console.log(error);
+     // console.log(error.message);
+     
+   }
+  )
+
   
 }
+
 
 
 
@@ -63,7 +65,18 @@ async function handleSubmitApi(values){
     },
     onSubmit:handleSubmitApi,
     validationSchema:validationSchema,
+
   })
+if(formik.touched.name || formik.touched.email){
+if(formik.errors.lenth == 0){
+  console.log("good");
+  
+}
+}
+ 
+
+ 
+
   return (
     <>
     
@@ -118,7 +131,7 @@ async function handleSubmitApi(values){
 </div>:null}
   
   </div>
-  <button type="submit" className="text-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5  dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+  <button type="submit" className="text-center text-black bg-gray-200  focus:ring-4  border-2 border-green-500 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 ">
  
  {getApi?<span className={style.loader}></span>:"Submit"}
  

@@ -109,7 +109,7 @@ return <UseLoading/>
       <button 
 onClick={()=>callAdd(products.id)}
 
-className={` my-5 w-[20%] bg-green-600 text-white rounded-lg py-3`}><i class="fa-solid fa-plus"></i> Add to cart
+className={` my-5 w-[20%] bg-green-600 text-white rounded-lg py-3`}><i className="fa-solid fa-plus"></i> Add to cart
 </button>
 </div>
     </div>
@@ -152,7 +152,7 @@ className={` my-5 w-[20%] bg-green-600 text-white rounded-lg py-3`}><i class="fa
 <button 
 onClick={()=>callAdd(products.id)}
 
-className={`${style.addCart} w-[80%] bg-green-600 text-white rounded-lg my-3 p-3`}><i class="fa-solid fa-plus"></i> Add to cart
+className={`${style.addCart} w-[80%] bg-green-600 text-white rounded-lg my-3 p-3`}><i className="fa-solid fa-plus"></i> Add to cart
 </button>
 
 <button onClick={

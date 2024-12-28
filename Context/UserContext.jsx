@@ -6,6 +6,7 @@ export default function UserContextProvider(props){
 
     let [checkLogin,setCheckLogin] = useState(false)
     let [userName,setUserName] = useState(false)
+    let [userEmail,setUserEmail] = useState(false)
 
     // useEffect(()=>{
 
@@ -18,9 +19,12 @@ export default function UserContextProvider(props){
         if(localStorage.getItem("userName") !== null){
             setUserName(localStorage.getItem("userName"))
         }
+        if(localStorage.getItem("userEmail") !== null){
+            setUserEmail(localStorage.getItem("userEmail"))
+        }
     },[])
 
-    return <userContext.Provider value={{checkLogin,setCheckLogin,setUserName,userName}}>
+    return <userContext.Provider value={{checkLogin,setCheckLogin,userEmail,setUserEmail,setUserName,userName}}>
         {props.children}
     </userContext.Provider>
 }

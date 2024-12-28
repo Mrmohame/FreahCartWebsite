@@ -94,13 +94,10 @@ async  function callAdd(id){
 
 let  {data,isError,error,isLoading}= UseProducts()
 
+
 if(isLoading){
   return <UseLoading/>
 }
-
-
-
-
 
 
 
@@ -121,8 +118,8 @@ if(isLoading){
 
 {data?.data?.data.map((products,x)=>{
   return (
-    <>
-           <div key={products.id}  className={`py-8 px-4 m-1 ${style.CartDiv}  rounded-[15px]  hover:shadow-lg hover:shadow-green-500 duration-[500ms]`}>
+    
+           <div key={products._id}  className={`py-8 px-4 m-1 ${style.CartDiv}  rounded-[15px]  hover:shadow-lg hover:shadow-green-500 duration-[500ms]`}>
            
         
     <div className="relative">
@@ -149,7 +146,7 @@ if(isLoading){
 <button 
 onClick={()=>callAdd(products.id)}
 
-className={`${style.addCart} w-[80%] bg-green-600 text-white rounded-lg my-3 p-3`}><i class="fa-solid fa-plus"></i> Add to cart
+className={`${style.addCart} w-[80%] bg-green-600 text-white rounded-lg my-3 p-3`}><i className="fa-solid fa-plus"></i> Add to cart
 </button>
 
 <button
@@ -161,7 +158,7 @@ onClick={(theClickedProduct)=>CheckUserWishList(products.id,theClickedProduct.ta
 
     </div>
 
-    </>
+    
   )
 })}
 

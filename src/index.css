@@ -34,10 +34,10 @@ body {
 }
 
 .active{
-  background-color: rgb(73, 73, 19);
-  padding: 7px;
-  border-radius: 10px;
-  font-size: 18px;
+  background-color: rgb(103, 103, 38);
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 17px;
   color: white;
 }
 

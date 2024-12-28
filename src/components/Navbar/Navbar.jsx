@@ -25,8 +25,9 @@ let [SearchElement,setSearchElement] = useState("")
 let [mk,setmk] = useState("")
 
 
-if(localStorage.getItem("token") == true){
-  
+
+
+   
 function getAllCategories(){
   axios.get(`https://ecommerce.routemisr.com/api/v1/categories`)
   .then(function({data}){
@@ -38,21 +39,11 @@ setAllCategories(data.data)
 
   })
 }
-
-
-
 let  {data,isError,error,isLoading}= UseProducts()
-
-
   let [hover2,setHover2]=useState(false)
-  
-
-
   function searchProduct(val) {
     setSearchElement(val.value) 
   }
-
-
   function getSearchEle(){
   
   
@@ -64,17 +55,11 @@ let  {data,isError,error,isLoading}= UseProducts()
     setmk("jj")
     
   }
-
-
 async function dataItems(){
   let {data} = await CartData()
   setAllData(data)
   
   }
-
-
-
-
 function logOut(){
   localStorage.removeItem("token")
   setCheckLogin(false)
@@ -84,10 +69,6 @@ function logOut(){
 setUserName(false)
 navigate("/login")
 }
-
-
-
-
 function openTheCategory(nameCat){
 
   if(nameCat == "Electronics"){
@@ -120,14 +101,10 @@ setHover2(true)
 
 
 useEffect(()=>{
+  if(!!localStorage.getItem("token") ){
   dataItems()
   getAllCategories()
-
-
-// document.addEventListener('DOMContentLoaded', function () {
-//   document.getElementById('myCartDropdownButton1').click();
-// });
-
+  }
 }
 
 ,[])
@@ -139,7 +116,7 @@ useEffect(()=>{
   }
   
   ,[])
-}
+
 
   return (
     <>

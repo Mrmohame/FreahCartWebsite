@@ -53,7 +53,7 @@ console.log(numOfWishList);
 console.log(numOfWishList?.length > 0);
 
   
-if(numOfWishList?.filter((Product) => Product.id == id || Product == id) == false){
+if(numOfWishList?.length > 0 == false ? true : numOfWishList?.filter((Product) => Product.id == id || Product == id) == false){
   makeWishList(id,theClickedProduct)
   console.log("notFound");
   

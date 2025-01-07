@@ -21,7 +21,7 @@ export default function Products() {
   
   let {addToCart,setNumOfItems,AddWishList,RemoveWishList,setnumOfWishList,numOfWishList}=useContext(CartContext)
 
-  function JustOpen() {
+  function JustOpen() { 
   numOfWishList ?  numOfWishList?.map((id) => {
     document?.getElementById(id.id)?.classList?.replace("text-black","text-red-700")
   }):null
@@ -50,6 +50,7 @@ async function removeAddedWishList(id,theClickedProduct) {
 
  function CheckUserWishList(id,theClickedProduct) {
 console.log(numOfWishList);
+console.log(numOfWishList?.length > 0);
 
   
 if(numOfWishList?.filter((Product) => Product.id == id || Product == id) == false){

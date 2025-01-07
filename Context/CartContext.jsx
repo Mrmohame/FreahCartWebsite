@@ -69,6 +69,7 @@ function RemoveWishList(id){
   .catch((error)=>error)
 }
 function GetUserWishList() {
+  console.log("goodby512")
   return axios.get(`https://ecommerce.routemisr.com/api/v1/wishlist`,
     {
       headers:headers
@@ -76,12 +77,16 @@ function GetUserWishList() {
     )
       .then((response)=>
         {console.log(response.data.data)
+console.log("xjncwnwcenkm");
 
           setnumOfWishList(response?.data?.data)
         }
     )
-      .catch((error)=>error)
+      .catch((error)=>{console.log(error)
+        console.log("xjncwnwceswwkdmd4210nkm");     
+})
 }
+
 
 
 async function getNumberOfItems(){
@@ -90,7 +95,9 @@ async function getNumberOfItems(){
   }
 
 useEffect(()=>{
- if(headers == true){
+  console.log(headers);
+  
+ if(headers.token !== undefined){
   getNumberOfItems()
   GetUserWishList()
  }

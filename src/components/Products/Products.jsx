@@ -32,7 +32,7 @@ async function makeWishList(id,theClickedProduct) {
   setnumOfWishList(res?.data?.data)
   
   theClickedProduct.classList.replace("text-black","text-red-700")
-  if(res.data.status == "success"){
+  if(res?.data?.status == "success"){
     toast.success('Successfully, you add Product to wishList!');
   }
 }
@@ -43,7 +43,7 @@ async function removeAddedWishList(id,theClickedProduct) {
   // console.log(res);
   setnumOfWishList(res?.data?.data)
   theClickedProduct.classList.replace("text-red-700","text-black")
-  if(res.data.status == "success"){
+  if(res?.data?.status == "success"){
     toast.error('Successfully, you remove Product to wishList!');
   }
 }

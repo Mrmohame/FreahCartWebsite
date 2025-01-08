@@ -63,7 +63,7 @@ async function deleteItems(id){
 useEffect(() => {
 dataItems()
 },[])
-if(allData== null){
+if(allData == null){
   return <UseLoading/>
   }
 

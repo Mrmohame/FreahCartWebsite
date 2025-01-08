@@ -26,10 +26,19 @@ export default function Products() {
     document?.getElementById(id.id)?.classList?.replace("text-black","text-red-700")
   }):null
 }
-JustOpen()
+
+  JustOpen()
+
+  let  {data,isError,error,isLoading}= UseProducts()
+
 async function makeWishList(id,theClickedProduct) {
   let res= await AddWishList(id)
-  setnumOfWishList(res?.data?.data)
+  setnumOfWishList( res?.data?.data?.map((y)=> data?.data?.data?.filter((x)=>x._id==y),"10").map((x)=>x[0]))
+  console.log(data?.data?.data);
+  
+  console.log(
+    res?.data?.data?.map((y)=> data?.data?.data?.filter((x)=>x._id==y),"10").map((x)=>x[0])
+   );
   
   theClickedProduct.classList.replace("text-black","text-red-700")
   if(res?.data?.status == "success"){
@@ -41,7 +50,7 @@ async function makeWishList(id,theClickedProduct) {
 async function removeAddedWishList(id,theClickedProduct) {
   let res= await RemoveWishList(id)
   // console.log(res);
-  setnumOfWishList(res?.data?.data)
+  setnumOfWishList( res?.data?.data?.map((y)=> data?.data?.data?.filter((x)=>x._id==y),"10").map((x)=>x[0]))
   theClickedProduct.classList.replace("text-red-700","text-black")
   if(res?.data?.status == "success"){
     toast.error('Successfully, you remove Product to wishList!');
@@ -93,7 +102,7 @@ async  function callAdd(id){
 
  
 
-let  {data,isError,error,isLoading}= UseProducts()
+
 
 
 if(isLoading){

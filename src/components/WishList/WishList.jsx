@@ -10,7 +10,7 @@ export default function WishList() {
 
  let {addToCart,setNumOfItems,AddWishList,RemoveWishList,setnumOfWishList,numOfWishList}=useContext(CartContext)
 
- console.log(numOfWishList);
+
  
  function JustOpen() {
   numOfWishList ?  numOfWishList?.map((id) => {
@@ -18,7 +18,9 @@ export default function WishList() {
   }):null
 }
 
-
+useEffect(() => {
+  JustOpen()
+},[])
 
 async function makeWishList(id,theClickedProduct) {
   let res= await AddWishList(id)
@@ -83,15 +85,16 @@ async  function callAdd(id){
     
   }
   
+console.log(numOfWishList[numOfWishList.length - 1] == undefined);
 
 
-if(numOfWishList == null) {
+if(!numOfWishList) {
   return <UseLoading/>
 }
 
-useEffect(()=>{
-  JustOpen()
-},[])
+
+
+
 
 
   return (
@@ -104,40 +107,40 @@ useEffect(()=>{
 
 </div>
 <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 w-[90%] gap-5 mx-auto">
-{numOfWishList? numOfWishList?.map((products) =>            <div key={products.id}  className={`py-8 px-4 m-1 ${style.CartDiv}  rounded-[15px]  hover:shadow-lg hover:shadow-green-500 duration-[500ms]`}>
+{numOfWishList? numOfWishList?.map((products) =>            <div key={products?.id}  className={`py-8 px-4 m-1 ${style.CartDiv}  rounded-[15px]  hover:shadow-lg hover:shadow-green-500 duration-[500ms]`}>
            
-        
+ 
     <div className="relative">
-    <Link to={`/details/${products.id}/${products?.category?.name}`} key={products.id}>
-    <img className='w-full' src={products.imageCover} alt="" />
+    <Link to={`/details/${products.id}/${products?.category?.name}`} key={products?.id}>
+    <img className='w-full' src={products?.imageCover} alt="" />
     </Link>
 
     </div>
        
         
-    <Link to={`/details/${products.id}/${products?.category?.name}`} key={products.id}>
+    <Link to={`/details/${products?.id}/${products?.category?.name}`} key={products?.id}>
 
       
       <h2 className='text-[16px]'>{products?.title?.split(" ").slice(0,2).join(" ")}</h2>
       <h3 className='text-blue-600 text-sm'>{products?.category?.name}</h3>
       <div className="rate flex justify-between">
-        <span className='text-[15px]'>{products.price}EGP</span>
-        <span className='text-[15px]'>{products.ratingsAverage}<i className="fa-solid fa-star text-green-500 ps-1"></i></span>
+        <span className='text-[15px]'>{products?.price}EGP</span>
+        <span className='text-[15px]'>{products?.ratingsAverage}<i className="fa-solid fa-star text-green-500 ps-1"></i></span>
 
     </div>
        </Link>
 
 <div className="flex justify-between items-center">
 <button 
-onClick={()=>callAdd(products.id)}
+onClick={()=>callAdd(products?.id)}
 
 className={`${style.addCart} w-[80%] bg-green-600 text-white rounded-lg my-3 p-3`}><i className="fa-solid fa-plus"></i> Add to cart
 </button>
 
 <button
-onClick={(theClickedProduct)=>CheckUserWishList(products.id,theClickedProduct.target)}
+onClick={(theClickedProduct)=>CheckUserWishList(products?.id,theClickedProduct.target)}
 >
-<i  id={products.id} className={`text-black text-[1.7rem]  fa-solid fa-heart`}></i>
+<i  id={products?.id} className={`text-black text-[1.7rem]  fa-solid fa-heart`}></i>
 </button>
 </div>
     </div>)

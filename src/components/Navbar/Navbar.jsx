@@ -162,7 +162,7 @@ E-commerce
           </span><br/><span className='me-2 text-green-700'>&spades;</span>{userEmail}</span>
        </Dropdown.Header>
        <Dropdown.Item>
-       <button id="myCartDropdownButton1" data-dropdown-toggle="myCartDropdown1" type="button" className="inline-flex items-center rounded-lg justify-center p-2 hover:bg-gray-100 dark:hover:bg-gray-700 text-sm font-medium leading-none text-gray-900 dark:text-white">
+       <Link to={"/card"} id="myCartDropdownButton1" data-dropdown-toggle="myCartDropdown1" type="button" className="inline-flex items-center rounded-lg justify-center p-2 hover:bg-gray-100 dark:hover:bg-gray-700 text-sm font-medium leading-none text-gray-900 dark:text-white">
         <span className="sr-only">
           Cart
         </span>
@@ -173,7 +173,7 @@ E-commerce
        <span className='ms-2 text-green-500'> {numOfItems?.numOfCartItems} </span>
          </span>
         
-      </button>
+      </Link>
        </Dropdown.Item>
        <Dropdown.Item>
         Settings

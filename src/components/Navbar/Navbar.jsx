@@ -64,7 +64,7 @@ function logOut(){
   localStorage.removeItem("token")
   setCheckLogin(false)
 
-  
+  localStorage.removeItem("userEmail")
   localStorage.removeItem("userName")
 setUserName(false)
 navigate("/login")

@@ -14,7 +14,7 @@ export default function CartContextProvider(props) {
 let [numOfItems,setNumOfItems] = useState(0)
 let [numOfWishList,setnumOfWishList] = useState(0)
 
-if(headers.token !== undefined){
+
 function addToCart(id){
   return axios.post("https://ecommerce.routemisr.com/api/v1/cart", {productId:id},{headers:headers})
   .then((response)=>response)
@@ -90,7 +90,7 @@ async function getNumberOfItems(){
   let {data}= await CartData()
   setNumOfItems(data)
   }
-}
+
 useEffect(()=>{
 
   

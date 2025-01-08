@@ -30,7 +30,7 @@ async function handleSubmitApi(values){
   axios.post("https://ecommerce.routemisr.com/api/v1/auth/signup", values)
   .then(
    function(data){
-     localStorage.setItem("token", data.data.token)
+     localStorage.setItem("token", data?.data?.token)
      localStorage.setItem("userName", data.data.user.name)
      localStorage.setItem("userEmail", data.data.user.email)
      setUserEmail(data.data.user.email)

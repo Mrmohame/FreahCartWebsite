@@ -14,7 +14,7 @@ export default function CartContextProvider(props) {
 let [numOfItems,setNumOfItems] = useState(0)
 let [numOfWishList,setnumOfWishList] = useState(0)
 
-
+if(headers.token !== undefined){
 function addToCart(id){
   return axios.post("https://ecommerce.routemisr.com/api/v1/cart", {productId:id},{headers:headers})
   .then((response)=>response)
@@ -86,16 +86,13 @@ console.log("xjncwnwcenkm");
         console.log("xjncwnwceswwkdmd4210nkm");     
 })
 }
-
-
-
 async function getNumberOfItems(){
   let {data}= await CartData()
   setNumOfItems(data)
   }
-
+}
 useEffect(()=>{
-  console.log(headers);
+
   
  if(headers.token !== undefined){
   getNumberOfItems()
